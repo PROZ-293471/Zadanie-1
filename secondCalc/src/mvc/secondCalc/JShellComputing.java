@@ -13,31 +13,32 @@ public class JShellComputing {
 	public JShellComputing() {
 	}
 
-	static public String getResult(String equation) {
+	static public String getResult(String equation) throws MyException {
 
-		String result = "Failed to compute";
+		String result = equation;
 
-		jshell.eval("private double sqrt(double x) { if(x<0){AlertWindow.showAlert(\"Failed to compute!\");}else{return Math.sqrt(x);} }");
+		jshell.eval(
+				"private double sqrt(double x) { if(x<0){AlertWindow.showAlert(\"Failed to compute!\");}else{return Math.sqrt(x);} }");
 		jshell.eval("private double square(double x) {return Math.pow(x, 2.0);}");
-		jshell.eval("private double log(double x) {return Math.log10(x);}");
+		jshell.eval("private double log(double x) {if(x>0){return Math.log10(x);}else{return 0;}}");
 		{
 
 			List<SnippetEvent> events = jshell.eval(equation);
-			for (SnippetEvent e : events) {
-				if (e.causeSnippet() == null) {
-					switch (e.status()) {
-					case VALID:
-						if (e.value() != null) {
-							result = e.value();
-						}
-						break;
-					default:
-						AlertWindow.showAlert("Failed to compute!");
-					}
+			for (SnippetEvent s : events) {
+				if (s.causeSnippet() == null) {
+					if (s.value() != null) {
+						result = s.value();
+					} 
+					break;
 				}
+					
 			}
-
 		}
+
+		try {Double.parseDouble(result);}catch(NumberFormatException e) {
+			throw new MyException("Cannot compute!");
+		}
+		
 		return result;
 
 	};

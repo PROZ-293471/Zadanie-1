@@ -15,10 +15,12 @@ import mvc.secondCalc.view.*;
 public class CalcController {
 
 	private Input input = new Input();
-	
+
+	@SuppressWarnings("exports")
 	@FXML
 	public Label firstLabel;
 
+	@SuppressWarnings("exports")
 	@FXML
 	public Label secondLabel;
 
@@ -29,10 +31,10 @@ public class CalcController {
 		input.appendNumber(clickedButton.getText());
 		firstLabel.setText(input.getValue());
 	};
-	
+
 	@FXML
 	public void signButtonAction(ActionEvent event) {
-		
+
 		Button clickedButton = (Button) event.getSource();
 		input.appendSign(clickedButton.getText());
 		firstLabel.setText(input.getValue());
@@ -40,66 +42,99 @@ public class CalcController {
 
 	@FXML
 	public void zeroButtonAction(ActionEvent event) {
-		
+
 		Button clickedButton = (Button) event.getSource();
 		input.appendZero(clickedButton.getText());
 		firstLabel.setText(input.getValue());
 	};
-	
+
 	@FXML
 	public void dotButtonAction(ActionEvent event) {
-		
+
 		Button clickedButton = (Button) event.getSource();
-		input.appendDot(clickedButton.getText());
-		firstLabel.setText(input.getValue());
+		try {
+			input.appendDot(clickedButton.getText());
+			firstLabel.setText(input.getValue());
+		} catch (MyException e) {
+			e.showAlertWindow();
+		}
+
 	};
-	
+
 	@FXML
 	public void sqrtButtonAction() {
 
+		String res = input.getValue();
 		input.sqrt();
-		String res = JShellComputing.getResult(input.getValue());
-		input.clean();
-		firstLabel.setText(input.getValue());
-		secondLabel.setText(res);
+		try {
+			res = JShellComputing.getResult(input.getValue());
+		} catch (MyException e) {
+			e.showAlertWindow();
+		} finally {
+			input.clean();
+			firstLabel.setText(input.getValue());
+			secondLabel.setText(res);
+		}
+
 	};
-	
+
 	@FXML
 	public void squareButtonAction() {
 
+		String res = input.getValue();
 		input.square();
-		String res = JShellComputing.getResult(input.getValue());
-		input.clean();
-		firstLabel.setText(input.getValue());
-		secondLabel.setText(res);
+		try {
+			res = JShellComputing.getResult(input.getValue());
+		} catch (MyException e) {
+			e.showAlertWindow();
+		} finally {
+			input.clean();
+			firstLabel.setText(input.getValue());
+			secondLabel.setText(res);
+		}
+
 	};
-	
+
 	@FXML
 	public void logButtonAction() {
 
+		String res = input.getValue();
 		input.log();
-		String res = JShellComputing.getResult(input.getValue());
-		input.clean();
-		firstLabel.setText(input.getValue());
-		secondLabel.setText(res);
+		try {
+			res = JShellComputing.getResult(input.getValue());
+		} catch (MyException e) {
+			e.showAlertWindow();
+		} finally {
+			input.clean();
+			firstLabel.setText(input.getValue());
+			secondLabel.setText(res);
+		}
+
 	};
-	
-	@FXML 
+
+	@FXML
 	public void backspaceButtonAction() {
-		
+
 		input.backspace();
 		firstLabel.setText(input.getValue());
 	}
-	
+
 	@FXML
 	public void equalsButtonAction() {
-		
-		String res = JShellComputing.getResult(input.getValue());
-		secondLabel.setText(res);
-		input.clean();
-		firstLabel.setText(input.getValue());
+
+		String res;
+		try {
+			res = JShellComputing.getResult(input.getValue());
+			secondLabel.setText(res);
+			input.clean();
+			firstLabel.setText(input.getValue());
+		} catch (MyException e) {
+			// TODO Auto-generated catch block
+			e.showAlertWindow();
+			secondLabel.setText(input.getValue());
+		}
 	};
-	
+
 	@FXML
 	public void memoryButtonAction() {
 

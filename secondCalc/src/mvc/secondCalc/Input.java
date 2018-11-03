@@ -69,10 +69,10 @@ public class Input {
 		}
 	}
 
-	public void appendDot(String str) {
+	public void appendDot(String str) throws MyException {
 
 		if (dotFlag == true) {
-			AlertWindow.showAlert("ERROR!");
+			throw new MyException("Second dot in a number!");
 		} else {
 			System.out.println(dotFlag);
 			dotFlag = true;
