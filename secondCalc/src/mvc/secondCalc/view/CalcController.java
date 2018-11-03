@@ -1,4 +1,4 @@
-package mvc.secondCalc;
+package mvc.secondCalc.view;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import mvc.secondCalc.model.Input;
+import mvc.secondCalc.model.JShellComputing;
+import mvc.secondCalc.model.MyException;
 import mvc.secondCalc.view.*;
 
 public class CalcController {

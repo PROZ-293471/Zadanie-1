@@ -1,10 +1,10 @@
-package mvc.secondCalc;
+package mvc.secondCalc.model;
 
 public class MyException extends Exception{
 
 	String alert;
 	
-	MyException(String str){
+	public MyException(String str){
 		alert = str;
 	}
 	

@@ -1,4 +1,4 @@
-package mvc.secondCalc;
+package mvc.secondCalc.model;
 
 public class Number {
 	private String value;

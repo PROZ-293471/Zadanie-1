@@ -1,4 +1,4 @@
-package mvc.secondCalc;
+package mvc.secondCalc.model;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;

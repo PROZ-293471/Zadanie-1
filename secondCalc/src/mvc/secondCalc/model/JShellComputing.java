@@ -1,4 +1,4 @@
-package mvc.secondCalc;
+package mvc.secondCalc.model;
 
 import java.util.List;
 

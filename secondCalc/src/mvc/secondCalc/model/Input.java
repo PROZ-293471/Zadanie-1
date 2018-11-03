@@ -1,6 +1,4 @@
-package mvc.secondCalc;
-
-import java.util.HashMap;
+package mvc.secondCalc.model;
 
 public class Input {
 
