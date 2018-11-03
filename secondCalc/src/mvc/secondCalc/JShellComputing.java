@@ -28,17 +28,19 @@ public class JShellComputing {
 				if (s.causeSnippet() == null) {
 					if (s.value() != null) {
 						result = s.value();
-					} 
+					}
 					break;
 				}
-					
+
 			}
 		}
 
-		try {Double.parseDouble(result);}catch(NumberFormatException e) {
+		try {
+			Double.parseDouble(result);
+		} catch (NumberFormatException e) {
 			throw new MyException("Cannot compute!");
 		}
-		
+
 		return result;
 
 	};
