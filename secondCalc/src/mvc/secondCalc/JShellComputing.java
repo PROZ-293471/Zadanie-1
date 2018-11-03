@@ -17,7 +17,7 @@ public class JShellComputing {
 
 		String result = "Failed to compute";
 
-		jshell.eval("private double sqrt(double x) { return Math.sqrt(x); }");
+		jshell.eval("private double sqrt(double x) { if(x<0){AlertWindow.showAlert(\"Failed to compute!\");}else{return Math.sqrt(x);} }");
 		jshell.eval("private double square(double x) {return Math.pow(x, 2.0);}");
 		jshell.eval("private double log(double x) {return Math.log10(x);}");
 		{
@@ -32,6 +32,7 @@ public class JShellComputing {
 						}
 						break;
 					default:
+						AlertWindow.showAlert("Failed to compute!");
 					}
 				}
 			}

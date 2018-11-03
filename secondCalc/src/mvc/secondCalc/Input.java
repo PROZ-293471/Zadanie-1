@@ -72,7 +72,7 @@ public class Input {
 	public void appendDot(String str) {
 
 		if (dotFlag == true) {
-			// jakiœ wyj¹tek
+			AlertWindow.showAlert("ERROR!");
 		} else {
 			System.out.println(dotFlag);
 			dotFlag = true;
