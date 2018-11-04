@@ -2,126 +2,118 @@ package mvc.secondCalc.model;
 
 public class Input {
 
-	private String value = "0";
+	private String firstValue = "0";
+	private String secondValue = "0";
+	private String cumulatedValue = "0";
 	private Boolean signFlag = false;
 	private Boolean dotFlag = false;
 	private Boolean cleanFlag = true;
 
-	public Boolean getSignFlag() {
-		return signFlag;
+	public String getFirstValue() {
+		return firstValue;
 	}
 
-	public String getValue() {
-		return value;
+	public String getSecondValue() {
+		return secondValue;
 	}
 
-	public void setValue(String str) {
-		value = str;
-		cleanFlag = false;
-		checkDot();
+	public String getCumulatedValue() {
+		return cumulatedValue;
 	}
+
+	private void cleanFirstValue() {
+		firstValue = "0";
+		cleanFlag = true;
+	}
+	
+	private boolean checkDot() {
+		return firstValue.contains(".");
+	} 
 
 	public void appendNumber(String str) {
 
+		if (signFlag == true) {
+
+			cleanFirstValue();
+		}
+
 		if (cleanFlag == true) {
-			value = str;
-			cleanFlag = false;
+
+			firstValue = str;
+
+			if (secondValue.equals("0")) {
+
+				secondValue = str;
+			} else {
+				secondValue += str;
+			}
+
+			if (str.equals("0") == false) {
+
+				cleanFlag = false;
+			}
 		} else {
-			value += str;
+			firstValue += str;
+			secondValue += str;
 		}
+
 		signFlag = false;
-	}
-
-	public void appendZero(String str) {
-
-		if (cleanFlag != true) {
-			appendNumber(str);
-		}
 	}
 
 	public void appendSign(String str) {
 
-		if (signFlag == true) {
-			value = value.substring(0, value.length() - 1);
-			if (dotFlag == false) {
-				value += ".0";
-				dotFlag = true;
+		if (signFlag == false) {
+
+			/*
+			 * Making the number double format
+			 */
+			if (checkDot() == false) {
+				secondValue += ".0";
 			}
-			value += str;
+			if (secondValue.endsWith(".")) {
+				secondValue += "0";
+			}
+
+			/*
+			 * calculating the temporary value
+			 */
+			secondValue += str;
+			signFlag = true;
 		} else {
-			if (cleanFlag == true) {
-				value = "0" + str;
-				cleanFlag = false;
-				signFlag = true;
-			} else {
-				if (dotFlag == false) {
-					value += ".0";
-					dotFlag = true;
-				}
-				value += str;
-				signFlag = true;
-			}
+			secondValue = secondValue.substring(0, secondValue.length() - 1) + str;
 		}
-		if (!str.equals(".")) {
-			dotFlag = false;
-		}
+
 	}
 
 	public void appendDot(String str) throws MyException {
 
-		if (dotFlag == true) {
+		if (checkDot() == true) {
 			throw new MyException("Second dot in a number!");
 		} else {
-			System.out.println(dotFlag);
-			dotFlag = true;
-			appendSign(str);
-			System.out.println(dotFlag);
+			firstValue += str;
+			secondValue += str;
 		}
 	}
 
-	public void sqrt() {
-		if (signFlag == true) {
-			value = value.substring(0, value.length() - 1);
+	public void equals() throws MyException {
+		try {
+			cleanFirstValue();
+			firstValue = JShellComputing.getResult(secondValue);
+		} catch (MyException e) {
+			e.showAlertWindow();
 		}
-		value = "sqrt(" + value + ")";
-	}
+		secondValue = firstValue;
 
-	public void square() {
-		if (signFlag == true) {
-			value = value.substring(0, value.length() - 1);
+	}
+	
+	public void specialSign(String str) {
+		try {
+			cleanFirstValue();
+			firstValue = JShellComputing.getResult(str+"("+secondValue+")");
+		} catch (MyException e) {
+			e.showAlertWindow();
 		}
-		value = "square(" + value + ")";
-	}
-
-	public void log() {
-		if (signFlag == true) {
-			value = value.substring(0, value.length() - 1);
-		}
-		value = "log(" + value + ")";
-	}
-
-	public void backspace() {
-		if (value.length() == 1) {
-			clean();
-		} else {
-			value = value.substring(0, value.length() - 1);
-			checkDot();
-		}
-	}
-
-	public void clean() {
-
-		value = "0";
-		cleanFlag = true;
-	}
-
-	public void checkDot() {
-
-		if (value.contains(".") == true) {
-			dotFlag = true;
-		} else {
-			dotFlag = false;
-		}
+		secondValue = firstValue;
 	}
 
 }

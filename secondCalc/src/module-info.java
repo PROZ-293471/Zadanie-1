@@ -12,5 +12,7 @@ module secondCalc {
 	requires javafx.fxml;
 	requires javafx.base;
 	exports mvc.secondCalc.main;
-	exports mvc.secondCalc.view;
+	exports mvc.secondCalc.control;
+	
 }
+
