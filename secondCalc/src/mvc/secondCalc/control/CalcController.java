@@ -2,18 +2,10 @@ package mvc.secondCalc.control;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
-import javafx.stage.Stage;
 import mvc.secondCalc.model.Input;
-import mvc.secondCalc.model.JShellComputing;
 import mvc.secondCalc.model.MyException;
-import mvc.secondCalc.view.*;
 
 /**
  * 
@@ -41,6 +33,11 @@ public class CalcController {
 	@SuppressWarnings("exports")
 	@FXML
 	public Label secondLabel;
+	
+	private void update() {
+		firstLabel.setText(input.getActualNumber());
+		secondLabel.setText(input.getSecondValue());
+	}
 
 	/*
 	 * Method merged with number buttons
@@ -50,8 +47,7 @@ public class CalcController {
 
 		Button clickedButton = (Button) event.getSource();
 		input.appendNumber(clickedButton.getText());
-		firstLabel.setText(input.getFirstValue());
-		secondLabel.setText(input.getSecondValue());
+		update();
 	};
 
 	/*
@@ -70,9 +66,12 @@ public class CalcController {
 	public void signButtonAction(ActionEvent event) {
 
 		Button clickedButton = (Button) event.getSource();
-		input.appendSign(clickedButton.getText());
-		firstLabel.setText(input.getFirstValue());
-		secondLabel.setText(input.getSecondValue());
+		try {
+			input.appendSign(clickedButton.getText());
+		} catch (MyException e) {
+			e.showAlertWindow();
+		}
+		update();
 	};
 
 	/*
@@ -84,8 +83,7 @@ public class CalcController {
 		Button clickedButton = (Button) event.getSource();
 		try {
 			input.appendDot(clickedButton.getText());
-			firstLabel.setText(input.getFirstValue());
-			secondLabel.setText(input.getSecondValue());
+			update();
 		} catch (MyException e) {
 			e.showAlertWindow();
 		}
@@ -98,7 +96,13 @@ public class CalcController {
 	@FXML
 	public void sqrtButtonAction() {
 
-
+		try {
+			input.sqrt();
+		} catch (MyException e) {
+			// TODO Auto-generated catch block
+			e.showAlertWindow();
+		}
+		update();
 	};
 
 	/*
@@ -107,8 +111,13 @@ public class CalcController {
 	@FXML
 	public void squareButtonAction(ActionEvent event) {
 		
-		Button clickedButton = (Button) event.getSource();
-		input.specialSign(clickedButton.getText());
+		try {
+			input.square();
+		} catch (MyException e) {
+			// TODO Auto-generated catch block
+			e.showAlertWindow();
+		}
+		update();
 	};
 
 	/*
@@ -117,6 +126,28 @@ public class CalcController {
 	@FXML
 	public void logButtonAction() {
 
+		try {
+			input.log();
+		} catch (MyException e) {
+			// TODO Auto-generated catch block
+			e.showAlertWindow();
+		}
+		update();
+	};
+	
+	/*
+	 * Method merged with log button
+	 */
+	@FXML
+	public void factorialButtonAction() {
+
+		try {
+			input.factorial();
+		} catch (MyException e) {
+			// TODO Auto-generated catch block
+			e.showAlertWindow();
+		}
+		update();
 	};
 
 	/*
@@ -125,7 +156,16 @@ public class CalcController {
 	@FXML
 	public void backspaceButtonAction() {
 
-		;
+		input.backspace();
+		update();
+	}
+	
+	@FXML
+	public void clearButtonAction() {
+		
+		input.clearAll();
+		update();
+		
 	}
 
 	/*
@@ -135,8 +175,7 @@ public class CalcController {
 	public void equalsButtonAction() throws MyException {
 
 		input.equals();
-		firstLabel.setText(input.getFirstValue());
-		secondLabel.setText(input.getSecondValue());
+		update();
 		
 	};
 	
@@ -146,6 +185,8 @@ public class CalcController {
 	@FXML
 	public void memoryButtonAction() {
 
+		input.memory();
+		update();
 		
 	}
 

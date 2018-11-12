@@ -1,7 +1,4 @@
 /**
- * 
- */
-/**
  * @author Rafal
  *
  */
@@ -15,4 +12,3 @@ module secondCalc {
 	exports mvc.secondCalc.control;
 	
 }
-
