@@ -4,9 +4,10 @@ import mvc.secondCalc.view.AlertWindow;
 
 /**
  * 
+ * 
+ * Class of Exception used to control faults done by a user.
+ * 
  * @author Rafal
- *
- *         Class of Exception used to control faults done by a user.
  */
 
 public class MyException extends Exception {

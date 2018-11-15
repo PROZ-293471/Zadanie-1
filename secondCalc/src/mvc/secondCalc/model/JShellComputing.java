@@ -7,11 +7,10 @@ import jdk.jshell.Snippet;
 import jdk.jshell.SnippetEvent;
 
 /**
- * 
+ * Class with the static method used to make any calculations. Special
+ * operations: sqrt, square, factorial are also provided. 
  * @author Rafal
  *
- *         Class with the static method used to make any calculations. Special
- *         operations: sqrt, square, factorial are also provided.
  *
  */
 

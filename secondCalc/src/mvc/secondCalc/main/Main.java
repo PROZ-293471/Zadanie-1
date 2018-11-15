@@ -20,8 +20,9 @@ import javafx.stage.Stage;
 import mvc.secondCalc.control.CalcController;
 
 /**
- * @author Rafal
  * Main Class extends Application
+ * @author Rafal
+ * 
  */
 public class Main extends Application {
 

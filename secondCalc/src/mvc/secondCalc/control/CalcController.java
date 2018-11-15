@@ -8,10 +8,10 @@ import mvc.secondCalc.model.Input;
 import mvc.secondCalc.model.MyException;
 
 /**
+ * Controller class. Methods in this class are merged with the buttons
+ * and fields created in FXML file.
  * @author Rafal
  *
- *         Controller class. Methods in this class are merged with the buttons
- *         and fields created in FXML file.
  */
 
 public class CalcController {
@@ -42,7 +42,7 @@ public class CalcController {
 
 	private void update() {
 		firstLabel.setText(input.getActualNumber());
-		secondLabel.setText(input.getSecondValue());
+		secondLabel.setText(input.getEquation());
 	}
 
 	/**

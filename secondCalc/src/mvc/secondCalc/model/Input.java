@@ -1,10 +1,11 @@
 package mvc.secondCalc.model;
 
 /**
- * @author Rafal
  * 
- *         Class in which the input strings are managed to be in an appropriate
- *         form to be computed and displayed on the screen.
+ * Class in which the input strings are managed to be in an appropriate
+ * form to be computed and displayed on the screen.
+ * 
+ * @author Rafal
  *
  */
 public class Input {
@@ -60,6 +61,7 @@ public class Input {
 	}
 
 	/**
+	 * Getter for actualNumber
 	 * @return The actually written number.
 	 */
 	public String getActualNumber() {
@@ -67,9 +69,10 @@ public class Input {
 	}
 
 	/**
+	 * Getter for equation
 	 * @return The actual equation.
 	 */
-	public String getSecondValue() {
+	public String getEquation() {
 		return equation;
 	}
 

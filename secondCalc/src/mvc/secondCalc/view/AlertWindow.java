@@ -4,8 +4,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 /**
+ * Managing the view of the alert window
  * @author Rafal
- * Managing the view of the alert window.
  *
  */
 public class AlertWindow {
