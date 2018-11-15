@@ -98,7 +98,7 @@ public class Input {
 				equation += str;
 				break body;
 			}
-			//case new number - after sign
+			//cases new number - after sign
 			actualNumber = str;
 			equation += str;
 
