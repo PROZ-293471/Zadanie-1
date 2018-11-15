@@ -8,7 +8,6 @@ import mvc.secondCalc.model.Input;
 import mvc.secondCalc.model.MyException;
 
 /**
- * 
  * @author Rafal
  *
  *         Controller class. Methods in this class are merged with the buttons
@@ -17,30 +16,41 @@ import mvc.secondCalc.model.MyException;
 
 public class CalcController {
 
-	/*
-	 * Creating an instance of "Input" class - managing the user input
-	 * 
-	 */
-	private Input input = new Input();
-
-	/*
-	 * Two Labels used in calculator view
+	/**
+	 * Label in which currently written number is visible.
 	 */
 	@SuppressWarnings("exports")
 	@FXML
 	public Label firstLabel;
 
+	/**
+	 * Label in which the currently written equation or the result is visible.
+	 */
 	@SuppressWarnings("exports")
 	@FXML
 	public Label secondLabel;
-	
+
+	/**
+	 * Object used to manage the user input.
+	 */
+	private Input input = new Input();
+
+	/**
+	 * Updates the both labels with the actual values of input. Used in the methods
+	 * merged with buttons.
+	 */
+
 	private void update() {
 		firstLabel.setText(input.getActualNumber());
 		secondLabel.setText(input.getSecondValue());
 	}
 
-	/*
-	 * Method merged with number buttons
+	/**
+	 * Method merged with numbers buttons - adds the next sign to the current number
+	 * - uses the "appendNumber" method of input and updating the labels
+	 * 
+	 * @param event object of the class ActionEvent used to get text from the
+	 *              clicked button
 	 */
 	@FXML
 	public void numbButtonAction(ActionEvent event) {
@@ -50,17 +60,13 @@ public class CalcController {
 		update();
 	};
 
-	/*
-	 * Method merged with zero button
-	 */
-	@FXML
-	public void zeroButtonAction(ActionEvent event) {
-
-	
-	};
-	
-	/*
-	 * Method merged with plus/minus/division/multiplication sign buttons
+	/**
+	 * Method merged with signs buttons - adds the sign or changing the current one
+	 * or displays the Alert window if exception is caught - uses the "appendSign"
+	 * method of input and updates the labels
+	 * 
+	 * @param event object of the class ActionEvent used to get text from the
+	 *              clicked button
 	 */
 	@FXML
 	public void signButtonAction(ActionEvent event) {
@@ -74,15 +80,30 @@ public class CalcController {
 		update();
 	};
 
-	/*
-	 * Method merged with dot button
+	/**
+	 * Method merged with "=" button - computes the equation or displays the Alert
+	 * window if exception is caught - uses the "equals" method of input and updates
+	 * the labels
 	 */
 	@FXML
-	public void dotButtonAction(ActionEvent event) {
+	public void equalsButtonAction() {
 
-		Button clickedButton = (Button) event.getSource();
+		input.equals();
+		update();
+
+	};
+
+	/**
+	 * Method merged with "." button - adds dot or displays the Alert window if
+	 * there is already a dot in the number - uses the "appendDot" method of input
+	 * and updates the labels
+	 * 
+	 */
+	@FXML
+	public void dotButtonAction() {
+
 		try {
-			input.appendDot(clickedButton.getText());
+			input.appendDot();
 			update();
 		} catch (MyException e) {
 			e.showAlertWindow();
@@ -90,68 +111,22 @@ public class CalcController {
 
 	};
 
-	/*
-	 * Method merged with sqrt button
+	/**
+	 * Method merged with "M" button - sets the result value to the actual number
+	 * label - uses the "memory" method of input and updates the labels
 	 */
 	@FXML
-	public void sqrtButtonAction() {
+	public void memoryButtonAction() {
 
-		try {
-			input.sqrt();
-		} catch (MyException e) {
-			// TODO Auto-generated catch block
-			e.showAlertWindow();
-		}
+		input.memory();
 		update();
+
 	};
 
-	/*
-	 * Method merged with square button
-	 */
-	@FXML
-	public void squareButtonAction(ActionEvent event) {
-		
-		try {
-			input.square();
-		} catch (MyException e) {
-			// TODO Auto-generated catch block
-			e.showAlertWindow();
-		}
-		update();
-	};
-
-	/*
-	 * Method merged with log button
-	 */
-	@FXML
-	public void logButtonAction() {
-
-		try {
-			input.log();
-		} catch (MyException e) {
-			// TODO Auto-generated catch block
-			e.showAlertWindow();
-		}
-		update();
-	};
-	
-	/*
-	 * Method merged with log button
-	 */
-	@FXML
-	public void factorialButtonAction() {
-
-		try {
-			input.factorial();
-		} catch (MyException e) {
-			// TODO Auto-generated catch block
-			e.showAlertWindow();
-		}
-		update();
-	};
-
-	/*
-	 * Method merged with backspace button
+	/**
+	 * Method merged with "Backspace" button - deletes the last sign in the
+	 * currently written number - uses the "backspace" method of input and updates
+	 * the labels
 	 */
 	@FXML
 	public void backspaceButtonAction() {
@@ -159,35 +134,81 @@ public class CalcController {
 		input.backspace();
 		update();
 	}
-	
+
+	/**
+	 * Method merged with "CE" button - clears both labels - uses the "clearAll"
+	 * method of input and updates the labels
+	 */
 	@FXML
 	public void clearButtonAction() {
-		
+
 		input.clearAll();
 		update();
-		
-	}
 
-	/*
-	 * Method merged with equals button
-	 */
-	@FXML
-	public void equalsButtonAction() throws MyException {
-
-		input.equals();
-		update();
-		
 	};
-	
-	/*
-	 * Method merged with memory button
+
+	/**
+	 * Method merged with "sqrt" button - computes the square root of the equation
+	 * or displays the Alert window if exception is caught - uses the "equals"
+	 * method of input and updates the labels
 	 */
 	@FXML
-	public void memoryButtonAction() {
+	public void sqrtButtonAction() {
 
-		input.memory();
+		try {
+			input.sqrt();
+		} catch (MyException e) {
+			e.showAlertWindow();
+		}
 		update();
-		
 	}
+
+	/**
+	 * Method merged with "square" button - computes the square of the equation or
+	 * displays the Alert window if exception is caught - uses the "equals" method
+	 * of input and updates the labels
+	 */
+	@FXML
+	public void squareButtonAction() {
+
+		try {
+			input.square();
+		} catch (MyException e) {
+			e.showAlertWindow();
+		}
+		update();
+	}
+
+	/**
+	 * Method merged with "log" button - computes the decimal logarithm or displays
+	 * the Alert window if exception is caught - uses the "equals" method of input
+	 * and updates the labels
+	 */
+	@FXML
+	public void logButtonAction() {
+
+		try {
+			input.log();
+		} catch (MyException e) {
+			e.showAlertWindow();
+		}
+		update();
+	};
+
+	/**
+	 * Method merged with "x!" button - computes the factorial or displays the Alert
+	 * window if exception is caught - uses the "factorial" method of input and
+	 * updates the labels
+	 */
+	@FXML
+	public void factorialButtonAction() {
+
+		try {
+			input.factorial();
+		} catch (MyException e) {
+			e.showAlertWindow();
+		}
+		update();
+	};
 
 }

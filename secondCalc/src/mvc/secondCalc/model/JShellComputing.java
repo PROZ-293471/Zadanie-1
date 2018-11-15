@@ -16,27 +16,30 @@ import jdk.jshell.SnippetEvent;
  */
 
 public class JShellComputing {
-	// creating a new JShell
+	
+	/**
+	 * JShell - REPL used to compute equations
+	 */
 	static JShell jshell = JShell.create();
 
 	/**
 	 * Returns the result as a String of the equation provided as a String. If the
 	 * equation is invalid the Exception is thrown and the result is set as 0.
 	 * 
-	 * @param equation String with the equation that is to be computed
-	 * @return result the computed result or 0 in case of exception
-	 * @throws MyException My own exception.
+	 * @param equation  String with the equation that is to be computed
+	 * @return result  the computed result or 0 in case of exception
+	 * @throws MyException  My own exception.
 	 */
 
 	static public String getResult(String equation) throws MyException {
 
+		// adding special operations
 		String result = equation;
 		jshell.eval(
 				"private double sqrt(double x) { return Math.sqrt(x);}");
 		jshell.eval("private double square(double x) {return Math.pow(x, 2.0);}");
 		jshell.eval("private double log(double x) {if(x>0){return Math.log10(x);}else{return 0;}}");
 		jshell.eval("private double fac(double n) {if (n == 0) return 1; else return n*fac(n-1);}");
-		// adding special operations
 
 		// Proceeding the calculations
 		List<SnippetEvent> events = jshell.eval(equation);

@@ -19,15 +19,22 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import mvc.secondCalc.control.CalcController;
 
+/**
+ * @author Rafal
+ * Main Class extends Application
+ */
 public class Main extends Application {
 
+	/**
+	 * Main method.
+	 * @param args Standard main method params.
+	 */
 	public static void main(String[] args) {
 		
 		launch(args);
 		
 	}
 
-	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("/mvc/secondCalc/view/Calc.fxml"));
 
